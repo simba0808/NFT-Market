@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { ThemeProvider } from "./context/themeContext";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider>
           <Header />
+          <Toaster position="top-right" />
           {children}
           <Footer />
         </ThemeProvider>
