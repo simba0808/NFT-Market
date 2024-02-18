@@ -1,15 +1,35 @@
 "use client"
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Logo } from "@/app/assets";
 import PrimaryButton from "../buttons/PrimaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
+import LoginModal from "../modals/LoginModal";
+import SignupModal from "../modals/SignupModal";
 
 import useTheme from "@/app/context/themeContext";
 
 const Header: React.FC = () => {
   const { theme, setTheme } = useTheme();
+  const [loginModalShow, setLoginModalShow] = useState<Boolean>(false);
+  const [signupModalShow, setSignupModalShow] = useState<Boolean>(false);
+
+  const handleLoginClick = () => {
+    setLoginModalShow(true);
+  }
+
+  const handleSignupClick = () => {
+    setSignupModalShow(true);
+  }
+
+  const handleLoginClose = () => {
+    setLoginModalShow(false);
+  }
+
+  const handleSignupClose = () => {
+    setSignupModalShow(false);
+  }
 
   return (
     <header>
@@ -35,8 +55,8 @@ const Header: React.FC = () => {
                 )
               }
             </button>
-            <PrimaryButton text="Sign In" />
-            <SecondaryButton text="Sign Up" />
+            <PrimaryButton onClick={handleLoginClick} text="Sign In" />
+            <SecondaryButton onClick={handleSignupClick} text="Sign Up" />
             <button data-collapse-toggle="mobile-menu-2" type="button" className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu-2" aria-expanded="false">
               <span className="sr-only">Open main menu</span>
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
@@ -61,6 +81,15 @@ const Header: React.FC = () => {
           </div>
         </div>
       </nav>
+      {
+        loginModalShow && 
+          <LoginModal handleCloseClick={handleLoginClose} />
+      }
+      {
+        signupModalShow &&
+          <SignupModal handleCloseClick={handleSignupClose} />
+
+      }
     </header>
   );
 }

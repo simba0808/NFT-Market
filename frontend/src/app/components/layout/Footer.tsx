@@ -2,7 +2,7 @@ import React from "react";
 import { Logo } from "@/app/assets";
 import Image from "next/image";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <footer className="p-4 sm:p-6 bg-white dark:bg-gray-800">
       <div className="mx-auto max-w-screen-xl">

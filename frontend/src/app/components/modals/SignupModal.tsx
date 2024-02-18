@@ -2,7 +2,7 @@ import { useState } from "react";
 import ModalCloseButton from "../buttons/ModalCloseButton";
 import PrimaryInput from "../inputs/PrimaryInput";
 
-const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
+const SignupModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
 
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -20,13 +20,14 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
           <ModalCloseButton onClick={handleCloseClick} />
           <div className="w-full bg-white dark:bg-gray-700 m-auto p-8 rounded-xl">
             <div className="text-black dark:text-white">
-              <h1 className="text-2xl mb-6">Login</h1>
+              <h1 className="text-2xl mb-6">Sign Up</h1>
               <div className="flex flex-col gap-4">
                 <PrimaryInput label="Email" placeholder="Enter your email" onChange={handleChange} />
                 <PrimaryInput label="Password" placeholder="Enter your password" onChange={handleChange}/>
+                <PrimaryInput label="Confirm Password" placeholder="Confirm your password" onChange={handleChange}/>
               </div>
               <br/>
-              <button type="button" className="float-right px-4 py-2 mt-4 rounded-md bg-red-500 text-white">Login</button>
+              <button type="button" className="float-right px-4 py-2 mt-4 rounded-md bg-red-500 text-white">Sign Up</button>
             </div>
           </div>
         </div>
@@ -35,4 +36,4 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
   );  
 }
 
-export default LoginModal;
+export default SignupModal;
