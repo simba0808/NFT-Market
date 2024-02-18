@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="mx-auto max-w-screen-xl">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://localhost:3000" className="flex items-center">
+            <a href="http://localhost:3000" className="flex items-center">
               <Image src={Logo} className="mr-3 w-12 h-12" alt="FlowBite Logo" />
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">NFT Market</span>
             </a>

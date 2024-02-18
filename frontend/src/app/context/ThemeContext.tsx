@@ -47,7 +47,6 @@ export const ThemeProvider = (props: PropsWithChildren) => {
     } else {
       document.documentElement.classList.remove("dark");
     }
-    
   }, [theme]);
 
   return (
