@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import "@rainbow-me/rainbowkit/styles.css";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { ThemeProvider } from "./context/themeContext";
+import { AuthProvider } from "./context/AuthContext";
+import { Providers } from "./provider";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,10 +26,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} min-h-screen`}>
         <ThemeProvider>
-          <Header />
-          <Toaster position="top-right" />
-          {children}
-          <Footer />
+          <AuthProvider>
+            <Providers>
+              <Header />
+              <Toaster position="top-right" />
+              {children}
+              <Footer />
+            </Providers>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

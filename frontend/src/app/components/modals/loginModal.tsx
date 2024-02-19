@@ -3,6 +3,7 @@ import PrimaryInput from "../inputs/PrimaryInput";
 import useToast from "@/app/hooks/useToast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import useAuthInfo from "@/app/context/AuthContext";
 import axios from "axios";
 
 interface userInputProps {
@@ -12,6 +13,7 @@ interface userInputProps {
 
 const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
   const router = useRouter();
+  const { setAuthInfo } = useAuthInfo();
   const [user, setUser] = useState<userInputProps>({
     email: "",
     password: "",
@@ -35,10 +37,17 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
         setInvalid(true);
         return;
       }
+
       const res = await axios.post("/api/auth/login", user);
-      router.push("/dashboard");
       handleCloseClick();
-      useToast({title: "Signup", text: "Successfully logged in!"});
+      console.log(">>>>", res.data.email)
+      router.push("/");
+        
+      setAuthInfo({
+        email: res.data.email
+      });
+      
+      useToast({title: "SignIn", text: "Successfully logged in!"});
     } catch (err) {
       useToast({title: "Login", text: "Failed login! Please check your email and password."});
       console.log(err);
