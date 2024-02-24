@@ -1,6 +1,6 @@
 import ModalCloseButton from "../buttons/ModalCloseButton";
 import PrimaryInput from "../inputs/PrimaryInput";
-import useToast from "@/app/hooks/useToast";
+import UseToast from "@/app/hooks/UseToast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import useAuthInfo from "@/app/context/AuthContext";
@@ -47,9 +47,11 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
         email: res.data.email
       });
       
-      useToast({title: "SignIn", text: "Successfully logged in!"});
+      <UseToast title="SignIn" text= "Successfully logged in!" />
+      //useToast.({title: "SignIn", text: "Successfully logged in!"});
     } catch (err) {
-      useToast({title: "Login", text: "Failed login! Please check your email and password."});
+      <UseToast title="SignIn" text= "Failed login! Please check your email and password." />
+      //useToast({title: "Login", text: "Failed login! Please check your email and password."});
       console.log(err);
     }
   }

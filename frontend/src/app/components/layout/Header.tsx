@@ -97,7 +97,7 @@ const Header: React.FC = () => {
             {
               authInfo.email !== "" ?
                 <>
-                  <ConnectButton showBalance={false} />
+                  <ConnectButton showBalance={true} />
                   <button onClick={handleMenuClick} >
                     <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" className="w-10 h-10 rounded-full" alt="avatar" />
                   </button>
