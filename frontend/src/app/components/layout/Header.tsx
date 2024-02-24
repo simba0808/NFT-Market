@@ -99,7 +99,7 @@ const Header: React.FC = () => {
                 <>
                   <ConnectButton showBalance={false} />
                   <button onClick={handleMenuClick} >
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" className="w-10 h-10 rounded-full" alt="avatar" />
+                    <Image src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=6GHAjsWpt9&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" className="w-10 h-10 rounded-full" alt="avatar" />
                   </button>
                   {
                     logoutShow &&
@@ -138,16 +138,16 @@ const Header: React.FC = () => {
           <div className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <a href="#" className="block py-2 pr-4 pl-3 dark:text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">About</a>
+                <a href="#" className="block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">About</a>
               </li>
               <li>
-                <a href="#" className="block py-2 pr-4 pl-3 dark:text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Collection</a>
+                <a href="#" className="block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Collection</a>
               </li>
               <li>
-                <a href="#" className="block py-2 pr-4 pl-3 dark:text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Creator</a>
+                <a href="#" className="block py-2 pr-4 pl-3rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Creator</a>
               </li>
               <li>
-                <a href="#" className="block py-2 pr-4 pl-3 dark:text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Road Map</a>
+                <a href="#" className="block py-2 pr-4 pl-3 rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white" aria-current="page">Road Map</a>
               </li>
             </ul>
           </div>
