@@ -1,6 +1,6 @@
 import ModalCloseButton from "../buttons/ModalCloseButton";
 import PrimaryInput from "../inputs/PrimaryInput";
-import { use, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import useToast from "@/app/hooks/useToast";
 
