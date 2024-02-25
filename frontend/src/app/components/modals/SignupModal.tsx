@@ -2,7 +2,7 @@ import ModalCloseButton from "../buttons/ModalCloseButton";
 import PrimaryInput from "../inputs/PrimaryInput";
 import { useState } from "react";
 import axios from "axios";
-import UseToast from "@/app/hooks/UseToast";
+import useToast from "@/app/hooks/useToast";
 
 interface userInputProps {
   email: string;
@@ -40,11 +40,9 @@ const SignupModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => 
       }
       const res = await axios.post("/api/auth/signup", user);
       handleCloseClick();
-      <UseToast title="Signup" text="Successfully signed up!" />
-      //useToast({title: "Signup", text: "Successfully signed up!"});
+      useToast({title: "Signup", text: "Successfully signed up!"});
     } catch (err) {
-      <UseToast title="Signup" text="Failed signed up!" />
-      //useToast({title: "Signup", text: "Failed signed up!"});
+      useToast({title: "Signup", text: "Failed signed up!"});
       console.log(err);
     }
   }

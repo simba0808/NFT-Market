@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import { CheckIcon } from "../assets";
 import Image from "next/image";
 
-export default function UseToast({ title, text }: { title: string, text: string }) {
+export default function useToast({ title, text }: { title: string, text: string }) {
   return (
     toast.custom((t) => (
       <div
