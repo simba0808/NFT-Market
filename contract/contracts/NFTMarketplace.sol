@@ -65,7 +65,7 @@ contract NFTMarketplace is ReentrancyGuard, IERC721Receiver {
       require(idToMarketItem[_itemId].owner == msg.sender, "only owner can put this item on sale");
       require(msg.value != listingPrice, "Amount doesn't meet listing fees requirements (.0025eth)");
     
-      IERC(_nftContract).safeTransferFrom(msg.sender, address(this), idToMarketItem[_itemId].tokenId);
+      IERC721(_nftContract).safeTransferFrom(msg.sender, address(this), idToMarketItem[_itemId].tokenId);
       marketOwner.transfer(msg.value);
 
       idToMarketItem[_itemId].onSale = true;
@@ -81,7 +81,7 @@ contract NFTMarketplace is ReentrancyGuard, IERC721Receiver {
       require(msg.value == idToMarketItem[_itemId].price, "Amount must be equal to price");
       require(msg.sender != idToMarketItem[_itemId].owner, "Owner should not buy their NFTs");
 
-      IERC721Receiver(_nftContract).safeTransferFrom(address(this), msg.sender, idToMarketItem[_itemId].tokenId);
+      IERC721(_nftContract).safeTransferFrom(address(this), msg.sender, idToMarketItem[_itemId].tokenId);
       idToMarketItem[_itemId].owner.transfer(msg.value);
 
       idToMarketItem[_itemId].prevOwners.push(idToMarketItem[_itemId].owner);
