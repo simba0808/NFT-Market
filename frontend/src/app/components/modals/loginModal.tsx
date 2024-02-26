@@ -39,14 +39,13 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
       }
 
       const res = await axios.post("/api/auth/login", user);
-      handleCloseClick();
-      console.log(">>>>", res.data.email)
-      router.push("/");
-        
+      
       setAuthInfo({
         email: res.data.email
       });
-      
+      handleCloseClick();
+      router.push("/market");
+
       useToast({title: "SignIn", text: "Successfully logged in!"});
     } catch (err) {
       useToast({title: "Login", text: "Failed login! Please check your email and password."});
