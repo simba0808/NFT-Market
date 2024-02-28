@@ -2,18 +2,74 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-
+import { create } from "ipfs-http-client";
 
 import ModalCloseButton from "../buttons/ModalCloseButton";
 import { NFTImageB } from "@/app/assets";
+import Toast from "../toast/Toast";
+interface NFTMetadataProps {
+  title: string,
+  description: string
+}
 
-export default function MintModal({ handleCloseClick }: { handleCloseClick: ()=>void }) {
+
+export default function MintModal({ handleCloseClick }: { handleCloseClick: () => void }) {
 
   const [NFTImage, setNFTImage] = useState<File | null>(null);
   const [NFTImagePreview, setNFTImagePreview] = useState("");
+  const [NFTMetaData, setNFTMetaData] = useState<NFTMetadataProps>({
+    title: "",
+    description: ""
+  });
+  const client = create({
+    host: "https://ipfs.infura.io",
+    port: 5001,
+    protocol: "https",
+    headers: {
+      authorization: `Basic ${Buffer.from(`${process.env.IPFS_PROJECT_ID}:${process.env.IPFS_API_KEY}`).toString("base64")}` 
+    }
+  });
+
+  const mintNFT = async () => {
+    if (NFTImage) {
+      //const metadata = 
+    }
+  }
+
+  const uploadMetaDataToIPFS = async () => {
+    const { title, description } = NFTMetaData;
+    
+    if(!title || !description) {
+      Toast({title: "Error", text: "Please fill in all metadata fields"});
+      return;
+    }
+
+    const imageURL = await uploadImageToIPFS();
+    console.log(imageURL)
+    const data = JSON.stringify({
+      title,
+      description,
+      image: imageURL
+    });
+    //console.log(data)
+  }
+
+  const uploadImageToIPFS = async () => {
+    try {
+      if (NFTImage !== null) {
+        const file = await client.add(NFTImage);
+        console.log(">>>", file.path)
+        const url = `https://ipfs.infura.io/ipfs/${file.path}`;
+
+        return url;
+      }
+    } catch (err) {
+      <Toast title="Upload Failed" text="Failed to upload image to Pinata" />
+    }
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if(e.target.files && e.target.files.length > 0) {
+    if (e.target.files && e.target.files.length > 0) {
       setNFTImage(e.target.files[0]);
       setNFTImagePreview(URL.createObjectURL(e.target.files[0]));
     }
@@ -30,15 +86,15 @@ export default function MintModal({ handleCloseClick }: { handleCloseClick: ()=>
             className="relative max-w-[400px] h-[200px] sm:h-[400px] mx-auto flex flex-col items-center justify-center border py-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-transparemt hover:bg-gray-800"
           >
             {
-              NFTImage && 
-                <Image
-                  className="max-h-[200px] sm:max-h-[400px] mx-auto"
-                  src={NFTImagePreview}
-                  style={{objectFit: "contain"}}
-                  width={400}
-                  height={400}
-                  alt="NFT Image"
-                />
+              NFTImage &&
+              <Image
+                className="max-h-[200px] sm:max-h-[400px] mx-auto"
+                src={NFTImagePreview}
+                style={{ objectFit: "contain" }}
+                width={400}
+                height={400}
+                alt="NFT Image"
+              />
             }
             <div className="absolute flex flex-col items-center justify-center pt-5 pb-6">
               <svg
@@ -71,22 +127,36 @@ export default function MintModal({ handleCloseClick }: { handleCloseClick: ()=>
 
           <div className="max-w-xl mx-auto mt-6">
             <label htmlFor="title" className="block mb-4">
-              <input required name="title" type="text" className="block w-full rounded-md px-3 py-2 text-black outline-none focus:ring-2" placeholder="Insert your NFT's title" /> 
+              <input
+                className="block w-full rounded-md px-3 py-2 text-black outline-none focus:ring-2"
+                name="title"
+                type="text"
+                placeholder="Insert your NFT's title" 
+                required
+                onChange={(e) => setNFTMetaData({...NFTMetaData, title: e.target.value})}
+              />
             </label>
 
             <label htmlFor="description" className="block mb-4">
-              <textarea className="block w-full min-h-40 p-2 rounded-md text-black outline-none" placeholder="Insert your NFT Description">
+              <textarea 
+                className="block w-full min-h-40 p-2 rounded-md text-black outline-none" 
+                placeholder="Insert your NFT Description"
+                onChange={(e) => setNFTMetaData({...NFTMetaData, description: e.target.value})}
+              >
 
               </textarea>
             </label>
+
             <div className="flex justify-end">
-              <button className="rounded-xl px-6 py-2 border-2 border-white">
+              <button 
+                className="rounded-xl px-6 py-2 border-2 border-white"
+                onClick={uploadMetaDataToIPFS}
+              >
                 Mint
               </button>
-
-            </div>
             </div>
           </div>
+        </div>
       </div>
     </dialog>
   );
