@@ -46,7 +46,6 @@ const LoginModal = ({ handleCloseClick }: { handleCloseClick: () => void }) => {
       });
       handleCloseClick();
       router.push("/market");
-
       Toast({title: "SignIn", text:"Successfully logged in!" });
     } catch (err) {
       Toast({title: "Login", text: "Failed login! Please check your email and password."});

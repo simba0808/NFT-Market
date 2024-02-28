@@ -6,6 +6,9 @@ const nextConfig = {
     config.externals.push('pino-pretty', 'lokijs', 'encoding');
     return config;
   },
+  images: {
+    domains: ['ipfs.infura.io'],
+  },
 };
 
 export default nextConfig;
